@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class ChatScreen extends StatelessWidget {
               Padding(padding: EdgeInsets.all(10)),
               const CircleAvatar(
                 backgroundColor: Colors.grey,
+              
                 radius: 40,
               ),
               SizedBox(
