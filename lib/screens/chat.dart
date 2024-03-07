@@ -2,14 +2,33 @@ import 'package:chat_app/widgets/chat_messages.dart';
 import 'package:chat_app/widgets/new_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
-  
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  void setupPushNotification() async {
+    final fcm = FirebaseMessaging.instance;
+
+    await fcm.requestPermission();
+
+    fcm.subscribeToTopic('chat');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setupPushNotification();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +40,6 @@ class ChatScreen extends StatelessWidget {
               Padding(padding: EdgeInsets.all(10)),
               const CircleAvatar(
                 backgroundColor: Colors.grey,
-              
                 radius: 40,
               ),
               SizedBox(
@@ -46,6 +64,10 @@ class ChatScreen extends StatelessWidget {
             ],
           ),
         ),
+
+        //end of drawer
+        //------------
+
         appBar: AppBar(
           title: const Text('Chat'),
         ),
