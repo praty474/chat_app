@@ -40,6 +40,7 @@ class _NewMessageState extends State<NewMessage> {
       'username': userData.data()!['username'],
       'userImage': userData.data()!['image_url'],
     });
+   
   }
 
   @override

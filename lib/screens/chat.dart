@@ -1,5 +1,7 @@
 import 'package:chat_app/widgets/chat_messages.dart';
+import 'package:chat_app/widgets/message_bubble.dart';
 import 'package:chat_app/widgets/new_message.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -21,6 +23,9 @@ class _ChatScreenState extends State<ChatScreen> {
     await fcm.requestPermission();
 
     fcm.subscribeToTopic('chat');
+
+    final token = await fcm.getToken();
+    print(token);
   }
 
   @override
@@ -37,12 +42,12 @@ class _ChatScreenState extends State<ChatScreen> {
         drawer: Drawer(
           child: ListView(
             children: [
-              Padding(padding: EdgeInsets.all(10)),
-              const CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 40,
+              const Padding(padding: EdgeInsets.all(10)),
+              const UserAccountsDrawerHeader(
+                accountName: Text('data'),
+                accountEmail: Text('username'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               TextButton.icon(
